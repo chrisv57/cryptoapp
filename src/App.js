@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
 
-import { Navbar, Exchanges, CryptoDetails, Cryptocurrencies, News, Homepage } from './components';
+import { Navbar, Nft, CryptoDetails, Cryptocurrencies, News, Homepage } from './components';
 import './App.css';
 const App = () => {
     return (
@@ -15,7 +15,7 @@ const App = () => {
                     <div className='routes'>
                         <Routes>
                             <Route path="/" element={<Homepage />} />
-                            <Route path="/exchanges" element={<Exchanges />} />
+                            <Route path="/nft" element={<Nft />} />
                             <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
                             <Route path="/crypto/:uuid" element={<CryptoDetails />} />
                             <Route path="/news" element={<News />} />
@@ -29,7 +29,7 @@ const App = () => {
                     </Typography.Title>
                     <Space>
                         <Link to="/">Home</Link>
-                        <Link to="/exchanges">Exchanges</Link>
+                        <Link to="/nft">Top NFTs Today</Link>
                         <Link to="/news">News</Link>
                     </Space>
                 </div>
