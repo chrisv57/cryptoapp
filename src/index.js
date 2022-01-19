@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import store from './App/store';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 ReactDom.render(
     <Router>
     {/* Now everysingle component inside the app will have access to the store variable by putting it under the provider */}
