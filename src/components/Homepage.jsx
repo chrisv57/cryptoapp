@@ -4,6 +4,7 @@ import { Typography, Row, Col, Statistic } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { useGetCryptosQuery } from '../services/cryptoApi';
+import { News,Cryptocurrencies } from '../components';
 
 const { Title } = Typography;
 
@@ -11,19 +12,33 @@ const { Title } = Typography;
 
 const Homepage = () => {
 
+    //getting data using reducer hook
     const { data, isFetching } = useGetCryptosQuery();
-    console.log(data);
 
+    //to use data
+    const globalStats = data?.data?.stats;
+
+    if(isFetching) return 'Loading...';
     return (
         <>
             <Title level={2} className='heading'>Global Stats</Title>
             <Row>
-                <Col span={12}><Statistic title="Total Cryptocurrencies" value="5" /></Col>
-                <Col span={12}><Statistic title="Total Exchanges" value="5" /></Col>
-                <Col span={12}><Statistic title="Total market cap" value="5" /></Col>
-                <Col span={12}><Statistic title="Total 24h Volume" value="5" /></Col>
-                <Col span={12}><Statistic title="Total markets" value="5" /></Col>
+                <Col span={12}><Statistic title="Total Cryptocurrencies" value={globalStats.total} /></Col>
+                <Col span={12}><Statistic title="Total Exchanges" value={millify(globalStats.totalExchanges)} /></Col>
+                <Col span={12}><Statistic title="Total market cap" value={millify(globalStats.totalMarketCap)} /></Col>
+                <Col span={12}><Statistic title="Total 24h Volume" value={millify(globalStats.total24hVolume)} /></Col>
+                <Col span={12}><Statistic title="Total markets" value={millify(globalStats.totalMarkets)} /></Col>
             </Row>
+            <div className="home-heading-container">
+                <Title level={2} className='home-title'>Top 10 Cryptocurrencies</Title>
+                <Title level={3} className='show-more'><Link to = "/cryptocurrencies">Show More</Link></Title>
+            </div>
+            <Cryptocurrencies simplified/>
+            <div className="home-heading-container">
+                <Title level={2} className='home-title'>Cryptocurrencies News</Title>
+                <Title level={3} className='show-more'><Link to = "/news">Show More</Link></Title>
+            </div>
+            <News simplified/>
         </>
     )
 }
